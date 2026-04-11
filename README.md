@@ -47,8 +47,16 @@ User: "Generate a Mem0 memory architecture diagram, dark style"
 ![Style 4 — Notion Clean](assets/samples/sample-style4-notion.png)
 
 ### Style 5 — Glassmorphism
-*Multi-Agent Collaboration — dark gradient background, frosted-glass cards*
+*Multi-Agent Collaboration — dark gradient background, s cards*
 ![Style 5 — Glassmorphism](assets/samples/sample-style5-glass.png)
+
+### Style 6 — Claude Official
+*System Architecture — warm cream background (#f8f6f3), Anthropic brand colors, clean professional aesthetic*
+![Style 6 — Claude Official](assets/samples/sample-style6-claude.png)
+
+### Style 7 — OpenAI Official
+*API Integration Flow — pure white background, OpenAI brand palette, modern minimalist design*
+![Style 7 — OpenAI Official](assets/samples/sample-style7-openai.png)
 
 ### AI Domain — Mem0 Memory Architecture
 *Full memory architecture with swim lanes, cylinders, and semantic read/write arrows*
