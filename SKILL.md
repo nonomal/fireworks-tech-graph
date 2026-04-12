@@ -12,6 +12,22 @@ description: >-
 
 Generate production-quality SVG technical diagrams exported as PNG via `rsvg-convert`.
 
+## Install Source
+
+Install this skill from GitHub:
+
+```bash
+npx skills add yizhiyanhua-ai/fireworks-tech-graph
+```
+
+Public package page:
+
+```text
+https://www.npmjs.com/package/@yizhiyanhua-ai/fireworks-tech-graph
+```
+
+Do not pass `@yizhiyanhua-ai/fireworks-tech-graph` directly to `skills add`, because the CLI expects a GitHub or local repository source.
+
 ## Helper Scripts (Recommended)
 
 Four helper scripts in `scripts/` directory provide stable SVG generation and validation:

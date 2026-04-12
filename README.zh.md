@@ -136,8 +136,16 @@
 ## 安装
 
 ```bash
-claude skills install fireworks-tech-graph
+npx skills add yizhiyanhua-ai/fireworks-tech-graph
 ```
+
+这个 Skill 的 `skills add` 安装源是 GitHub 仓库。npm 页面用于公开展示、版本分发和 README 浏览：
+
+```text
+https://www.npmjs.com/package/@yizhiyanhua-ai/fireworks-tech-graph
+```
+
+不要把 npm 包名直接写进 `skills add`，因为 CLI 会把安装源解析为 GitHub 路径或本地路径。
 
 或直接克隆：
 

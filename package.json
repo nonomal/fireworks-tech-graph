@@ -1,6 +1,6 @@
 {
   "name": "@yizhiyanhua-ai/fireworks-tech-graph",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Generate production-quality SVG technical diagrams (architecture, flowchart, UML, ER, sequence, etc.) with 7 built-in styles. Export as SVG+PNG via rsvg-convert.",
   "main": "SKILL.md",
   "keywords": [

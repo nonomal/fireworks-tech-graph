@@ -138,8 +138,16 @@ Keep the look minimal, white, precise, and modern with clean green-accented arro
 ## Installation
 
 ```bash
-claude skills install fireworks-tech-graph
+npx skills add yizhiyanhua-ai/fireworks-tech-graph
 ```
+
+This skill is installed from the GitHub repository. The npm package page is the public package/distribution page:
+
+```text
+https://www.npmjs.com/package/@yizhiyanhua-ai/fireworks-tech-graph
+```
+
+Do not use the npm package name with `skills add`, because the CLI resolves install sources as GitHub/local paths.
 
 Or clone directly:
 
