@@ -101,6 +101,7 @@ python3 ./scripts/generate-from-template.py architecture ./output/arch.svg '{"ti
     - Collapse repeated cross-layer arrows into a single "delegates down" rail outside the content area
     - Move legend/notes out of any region where arrows or labels land
     - Increase viewBox height/width rather than packing elements tighter
+    - If a filtered element (drop-shadow, blur) is missing one side of its border, move it ≥30px away from that viewBox edge, or remove the filter and rely on color/contrast for visual separation
   Skip this step silently if image reading is unavailable — do not guess.
 
 ## Diagram Types & Layout Rules
@@ -344,6 +345,7 @@ When two arrows must cross each other, ALWAYS use jump-over arcs to prevent visu
 2. **Text Overflow**: All text MUST fit with 8px padding (estimate: `text.length × 7px ≤ shape_width - 16px`)
 3. **Arrow-Text Alignment**: Arrow endpoints MUST connect to shape edges (not floating); all arrow labels MUST have background rects
 4. **Container Discipline**: Prefer arrows entering and leaving section containers through open gaps between components, not through inner component bodies
+5. **Filter Boundary Safety**: For every element with `filter="url(...)"`, verify `(element_x + element_width + filter_extension) ≤ viewBox_width` AND `element_x ≥ filter_extension`. The default filter region extends 10-20% beyond bbox; staying near viewBox edges causes Chrome/cairosvg to clip the element's edge-side stroke (one side of the border vanishes while other sides render correctly)
 
 ## SVG Technical Rules
 
@@ -407,6 +409,7 @@ python3 -c "import cairosvg; cairosvg.svg2png(url='file.svg', write_to='/tmp/tes
 - ❌ `marker-end=` → ✅ `marker-end="url(#arrow)"`
 - ❌ `L 29450` → ✅ `L 290,220`
 - ❌ Missing `</svg>` at end
+- ❌ Element with `filter` near viewBox edge — filter region extends 20% (default) or more beyond bbox; if that region exceeds viewBox, Chrome/cairosvg clip the filter rendering AND can drop the element's own stroke on that side. Keep filtered elements at least `max(20% of element size, shadow blur radius × 3)` away from viewBox edges, or omit the filter.
 
 ## Output
 
