@@ -333,6 +333,33 @@ Always include a **legend** when 2+ arrow types are used.
 - Route around dense node clusters, use different y-offsets for parallel arrows
 - Jump-over arcs (5px radius) for unavoidable crossings
 
+**Post-Generation Arrow Optimization**:
+
+When a user asks to "优化箭头" / "fix arrow routing" / "optimize the diagram" on an already-generated diagram, preserve all nodes, containers, styles, and layout — only modify the `arrows` entries in the JSON data, then re-render with `generate-from-template.py`.
+
+Available arrow override fields (in recommended order of use):
+
+| Field | Type | When to Use |
+|-------|------|-------------|
+| `source_port` / `target_port` | `"left"` / `"right"` / `"top"` / `"bottom"` | Arrow exits/enters from the wrong edge |
+| `corridor_x` | `[x, ...]` | Hint vertical segments toward this x lane (soft preference) |
+| `corridor_y` | `[y, ...]` | Hint horizontal segments toward this y lane (soft preference) |
+| `route_points` | `[[x1,y1], [x2,y2], ...]` | Force exact waypoints (bypasses auto-routing); keep segments orthogonal |
+| `routing_padding` | number (default: 24) | *(Advanced)* Adjust obstacle clearance for this arrow |
+| `port_clearance` | number | *(Advanced)* Adjust first-segment offset from node edge |
+
+Optimization steps:
+1. Read the existing SVG — identify which arrows overlap, cross nodes, or look misaligned
+2. Find those arrows in the JSON data by `source` / `target` pair
+3. Add `source_port` / `target_port` if the exit/entry direction is wrong; add `corridor_x` / `corridor_y` to space parallel arrows apart; use `route_points` only when hints alone cannot resolve the path
+4. Re-run `generate-from-template.py` with the updated JSON and validate with `validate-svg.sh`
+
+Example — spacing two overlapping arrows into separate corridors:
+```json
+{ "source": "nodeA", "target": "nodeB", "corridor_y": [280] }
+{ "source": "nodeC", "target": "nodeD", "corridor_y": [320] }
+```
+
 **Line Overlap Prevention** (CRITICAL - most common bug on Codex):
 When two arrows must cross each other, ALWAYS use jump-over arcs to prevent visual overlap:
 - Crossing horizontal arrows: add a small semicircle arc (radius 5px, stroke same color as arrow, fill none) that "jumps over" the other line
